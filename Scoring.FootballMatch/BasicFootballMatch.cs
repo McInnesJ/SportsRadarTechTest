@@ -1,6 +1,6 @@
 namespace Scoring.FootballMatch;
 
-public class FootballMatch(string homeTeam, string awayTeam) : IFootballMatch
+public class BasicFootballMatch(string homeTeam, string awayTeam) : IFootballMatch
 {
     public string HomeTeam { get; } = homeTeam;
     public string AwayTeam { get; } = awayTeam;

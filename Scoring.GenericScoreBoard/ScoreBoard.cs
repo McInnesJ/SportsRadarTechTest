@@ -38,7 +38,7 @@ public class ScoreBoard(
             throw new ArgumentException($"'{awayTeam}' is not a valid team name");
         }
 
-        matchDataStore.Add(new FootballMatch.FootballMatch(homeTeam, awayTeam));
+        matchDataStore.Add(new FootballMatch.BasicFootballMatch(homeTeam, awayTeam));
     }
 
     public void EndMatch(string homeTeam, string awayTeam)

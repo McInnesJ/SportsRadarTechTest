@@ -1,13 +1,14 @@
 using System.Data;
 using Moq;
 using Scoring.FootballMatch;
+using Scoring.GenericScoreBoard;
 using Scoring.GenericScoreBoard.Implementation;
 using Scoring.MatchDataStore;
 
 // Justification: Test file, want to create properties in the setup method
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
-namespace Scoring.GenericScoreBoard.Test;
+namespace Scoring.Tests;
 
 [TestClass]
 public class ScoreBoardTests
@@ -116,7 +117,7 @@ public class ScoreBoardTests
         _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
         _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(true);
         
-        IFootballMatch homeTeamMatch = new FootballMatch.FootballMatch(HomeTeam, "Scotland");
+        IFootballMatch homeTeamMatch = new FootballMatch.BasicFootballMatch(HomeTeam, "Scotland");
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(true);
         IFootballMatch awayTeamMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(false);
@@ -143,7 +144,7 @@ public class ScoreBoardTests
 
         IFootballMatch homeTeamMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(false);
-        IFootballMatch awayTeamMatch = new FootballMatch.FootballMatch("Scotland", AwayTeam);
+        IFootballMatch awayTeamMatch = new FootballMatch.BasicFootballMatch("Scotland", AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(true);
 
         // Act
@@ -167,7 +168,7 @@ public class ScoreBoardTests
     public void EndMatch_MatchFound_RemovedFromDataStore()
     {
         // Arrange
-        IFootballMatch returnedMatch = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
+        IFootballMatch returnedMatch = new FootballMatch.BasicFootballMatch(HomeTeam, AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
 
         // Act
@@ -205,7 +206,7 @@ public class ScoreBoardTests
     public void GetMatch_MatchFound_MatchReturned()
     {
         // Arrange
-        IFootballMatch expectedMatch = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
+        IFootballMatch expectedMatch = new FootballMatch.BasicFootballMatch(HomeTeam, AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out expectedMatch)).Returns(true);
 
         // Act

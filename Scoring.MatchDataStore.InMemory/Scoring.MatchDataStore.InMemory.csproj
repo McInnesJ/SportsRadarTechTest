@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Scoring.MatchDataStore\Scoring.MatchDataStore.csproj" />
+    </ItemGroup>
+
 </Project>

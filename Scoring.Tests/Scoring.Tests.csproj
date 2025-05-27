@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Scoring.GenericScoreBoard\Scoring.GenericScoreBoard.csproj" />
+      <ProjectReference Include="..\Scoring.MatchDataStore.InMemory\Scoring.MatchDataStore.InMemory.csproj" />
     </ItemGroup>
 
 </Project>
