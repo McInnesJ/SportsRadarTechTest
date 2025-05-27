@@ -79,7 +79,7 @@ public class ScoreBoardTests
         var ex = Assert.ThrowsException<ArgumentException>(() => _sut.StartMatch(HomeTeam, AwayTeam));
 
         // Assert
-        Assert.AreEqual("Neither team provided is valid", ex.Message);
+        Assert.AreEqual("Neither team name provided is valid", ex.Message);
 
         _matchDataStore.Verify(ds => ds.Add(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
@@ -89,17 +89,47 @@ public class ScoreBoardTests
     }
 
     [TestMethod]
-    public void StartMatch_TeamAlreadyInActiveMatch_ExceptionThrown_NoMatchCreated()
+    public void StartMatch_HomeTeamAlreadyInActiveMatch_ExceptionThrown_NoMatchCreated()
     {
         // Arrange
         _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
         _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(true);
+        
+        IFootballMatch homeTeamMatch = new FootballMatch(HomeTeam, "Scotland");
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(true);
+        IFootballMatch awayTeamMatch;
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(false);
 
         // Act
         var ex = Assert.ThrowsException<ArgumentException>(() => _sut.StartMatch(HomeTeam, AwayTeam));
 
         // Assert
         Assert.AreEqual("Norway is already playing against Scotland", ex.Message);
+
+        _matchDataStore.Verify(ds => ds.Add(It.Is<IFootballMatch>(m =>
+            m.HomeTeam == HomeTeam
+            && m.AwayTeam == AwayTeam
+            && m.HomeTeamScore == 0
+            && m.AwayTeamScore == 0)), Times.Never);
+    }
+
+    [TestMethod]
+    public void StartMatch_AwayTeamAlreadyInActiveMatch_ExceptionThrown_NoMatchCreated()
+    {
+        // Arrange
+        _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
+        _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(true);
+
+        IFootballMatch homeTeamMatch;
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(false);
+        IFootballMatch awayTeamMatch = new FootballMatch("Scotland", AwayTeam);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(true);
+
+        // Act
+        var ex = Assert.ThrowsException<ArgumentException>(() => _sut.StartMatch(HomeTeam, AwayTeam));
+
+        // Assert
+        Assert.AreEqual("Sweden is already playing against Scotland", ex.Message);
 
         _matchDataStore.Verify(ds => ds.Add(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
@@ -117,13 +147,13 @@ public class ScoreBoardTests
     {
         // Arrange
         IFootballMatch returnedMatch = new FootballMatch(HomeTeam, AwayTeam);
-        _matchDataStore.Setup(ds => ds.TryGet(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
 
         // Act
         _sut.EndMatch(HomeTeam, AwayTeam);
 
         // Assert
-        _matchDataStore.Verify(ds => ds.Remove(It.Is<IFootballMatch>(m =>
+        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
             && m.AwayTeam == AwayTeam)), Times.Once);
     }
@@ -133,7 +163,7 @@ public class ScoreBoardTests
     {
         // Arrange
         IFootballMatch returnedMatch;
-        _matchDataStore.Setup(ds => ds.TryGet(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
 
         // Act
         var ex = Assert.ThrowsException<DataException>(() => _sut.EndMatch(HomeTeam, AwayTeam));
@@ -141,7 +171,7 @@ public class ScoreBoardTests
         // Assert
         Assert.AreEqual("Match not found", ex.Message);
         
-        _matchDataStore.Verify(ds => ds.Remove(It.Is<IFootballMatch>(m =>
+        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
             && m.AwayTeam == AwayTeam)), Times.Never);
     }
@@ -155,13 +185,13 @@ public class ScoreBoardTests
     {
         // Arrange
         IFootballMatch returnedMatch = new FootballMatch(HomeTeam, AwayTeam);
-        _matchDataStore.Setup(ds => ds.TryGet(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
 
         // Act
         _sut.GetMatch(HomeTeam, AwayTeam);
 
         // Assert
-        _matchDataStore.Verify(ds => ds.Remove(It.Is<IFootballMatch>(m =>
+        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
             && m.AwayTeam == AwayTeam)), Times.Once);
     }
@@ -171,7 +201,7 @@ public class ScoreBoardTests
     {
         // Arrange
         IFootballMatch returnedMatch;
-        _matchDataStore.Setup(ds => ds.TryGet(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
 
         // Act
         var ex = Assert.ThrowsException<DataException>(() => _sut.EndMatch(HomeTeam, AwayTeam));
@@ -179,7 +209,7 @@ public class ScoreBoardTests
         // Assert
         Assert.AreEqual("Match not found", ex.Message);
 
-        _matchDataStore.Verify(ds => ds.Remove(It.Is<IFootballMatch>(m =>
+        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
             && m.AwayTeam == AwayTeam)), Times.Never);
     }
