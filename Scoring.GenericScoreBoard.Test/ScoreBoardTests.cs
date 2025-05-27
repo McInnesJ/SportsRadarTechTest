@@ -169,7 +169,7 @@ public class ScoreBoardTests
         var ex = Assert.ThrowsException<DataException>(() => _sut.EndMatch(HomeTeam, AwayTeam));
 
         // Assert
-        Assert.AreEqual("Match not found", ex.Message);
+        Assert.AreEqual("No active match found between Norway and Sweden", ex.Message);
         
         _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam

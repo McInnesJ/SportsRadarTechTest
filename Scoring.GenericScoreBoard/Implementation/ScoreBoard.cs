@@ -1,3 +1,4 @@
+using System.Data;
 using Scoring.GenericScoreBoard.API;
 using Scoring.GenericScoreBoard.InternalServices;
 
@@ -42,7 +43,12 @@ public class ScoreBoard(
 
     public void EndMatch(string homeTeam, string awayTeam)
     {
-        throw new NotImplementedException();
+        if (!matchDataStore.TryGetActiveMatch(homeTeam, awayTeam, out var match))
+        {
+            throw new DataException($"No active match found between {homeTeam} and {awayTeam}");
+        }
+
+        matchDataStore.EndMatch(match);
     }
 
     public IFootballMatch GetMatch(string homeTeam, string awayTeam)
