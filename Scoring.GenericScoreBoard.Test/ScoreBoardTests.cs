@@ -69,6 +69,26 @@ public class ScoreBoardTests
     }
 
     [TestMethod]
+    public void StartMatch_AwayTeamInvalid_ExceptionThrown_NoMatchCreated()
+    {
+        // Arrange
+        _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
+        _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(false);
+
+        // Act
+        var ex = Assert.ThrowsException<ArgumentException>(() => _sut.StartMatch(HomeTeam, AwayTeam));
+
+        // Assert
+        Assert.AreEqual("'Sweden' is not a valid team name", ex.Message);
+
+        _matchDataStore.Verify(ds => ds.Add(It.Is<IFootballMatch>(m =>
+            m.HomeTeam == HomeTeam
+            && m.AwayTeam == AwayTeam
+            && m.HomeTeamScore == 0
+            && m.AwayTeamScore == 0)), Times.Never);
+    }
+
+    [TestMethod]
     public void StartMatch_BothTeamsInvalid_ExceptionThrown_NoMatchCreated()
     {
         // Arrange
