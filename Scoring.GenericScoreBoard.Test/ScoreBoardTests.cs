@@ -230,14 +230,9 @@ public class ScoreBoardTests
     public void GetCurrentMatches_MatchesInCorrectOrder_OrderPreservedAndReturned()
     {
         // Arrange
-        var match1 = new FootballMatch("Norway", "Scotland");
-        match1.UpdateScore(3, 4);
-        
-        var match2 = new FootballMatch("Italy", "France");
-        match2.UpdateScore(2, 2);
-        
-        var match3 = new FootballMatch("Denmark", "Netherlands");
-        match3.UpdateScore(1, 0);
+        var match1 = CreateMatch("Norway", "Scotland", 3, 4);
+        var match2 = CreateMatch("Italy", "France", 2, 2);
+        var match3 = CreateMatch("Denmark", "Netherlands", 1, 0);
 
         var storedMatches = new List<IFootballMatch> { match1, match2, match3 };
         _matchDataStore.Setup(ds => ds.GetActive()).Returns(storedMatches);
@@ -253,14 +248,9 @@ public class ScoreBoardTests
     public void GetCurrentMatches_MatchesInWrongOrder_MatchesSortedAndReturned()
     {
         // Arrange
-        var match1 = new FootballMatch("Italy", "France");
-        match1.UpdateScore(2, 2);
-
-        var match2 = new FootballMatch("Denmark", "Netherlands");
-        match2.UpdateScore(1, 0);
-
-        var match3 = new FootballMatch("Norway", "Scotland");
-        match3.UpdateScore(3, 4);
+        var match1 = CreateMatch("Italy", "France", 2, 2);
+        var match2 = CreateMatch("Denmark", "Netherlands", 1, 0);
+        var match3 = CreateMatch("Norway", "Scotland", 3, 4);
 
         var storedMatches = new List<IFootballMatch> { match1, match2, match3 };
         _matchDataStore.Setup(ds => ds.GetActive()).Returns(storedMatches);
@@ -277,14 +267,9 @@ public class ScoreBoardTests
     public void GetCurrentMatches_MatchesWithSameScore_MatchesSortedAndReturned()
     {
         // Arrange
-        var match1 = new FootballMatch("Italy", "France");
-        match1.UpdateScore(2, 2);
-
-        var match2 = new FootballMatch("Denmark", "Netherlands");
-        match2.UpdateScore(3, 4);
-
-        var match3 = new FootballMatch("Norway", "Scotland");
-        match3.UpdateScore(3, 4);
+        var match1 = CreateMatch("Italy", "France", 2, 2);
+        var match2 = CreateMatch("Denmark", "Netherlands", 3, 4);
+        var match3 = CreateMatch("Norway", "Scotland", 3, 4);
 
         var storedMatches = new List<IFootballMatch> { match1, match2, match3 };
         _matchDataStore.Setup(ds => ds.GetActive()).Returns(storedMatches);
@@ -301,14 +286,9 @@ public class ScoreBoardTests
         public void GetCurrentMatches_MatchesWithSameScoreTotal_MatchesSortedAndReturned()
         {
             // Arrange
-            var match1 = new FootballMatch("Italy", "France");
-            match1.UpdateScore(2, 2);
-    
-            var match2 = new FootballMatch("Denmark", "Netherlands");
-            match2.UpdateScore(6, 1);
-    
-            var match3 = new FootballMatch("Norway", "Scotland");
-            match3.UpdateScore(3, 4);
+            var match1 = CreateMatch("Italy", "France", 2, 2);
+            var match2 = CreateMatch("Denmark", "Netherlands", 6, 1);
+            var match3 = CreateMatch("Norway", "Scotland", 3, 4);
     
             var storedMatches = new List<IFootballMatch> { match1, match2, match3 };
             _matchDataStore.Setup(ds => ds.GetActive()).Returns(storedMatches);
@@ -322,4 +302,15 @@ public class ScoreBoardTests
         }
 
     #endregion GetCurrentMatches
+
+    private IFootballMatch CreateMatch(string homeTeam, string awayTeam, int homeScore, int awayScore)
+    {
+        var match = new Mock<IFootballMatch>();
+        match.SetupGet(m => m.HomeTeam).Returns(homeTeam);
+        match.SetupGet(m => m.AwayTeam).Returns(awayTeam);
+        match.SetupGet(m => m.HomeTeamScore).Returns(homeScore);
+        match.SetupGet(m => m.AwayTeamScore).Returns(awayScore);
+        
+        return match.Object;
+    }
 }

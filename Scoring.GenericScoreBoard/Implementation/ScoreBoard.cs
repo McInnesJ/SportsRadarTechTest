@@ -60,6 +60,11 @@ public class ScoreBoard(
 
     public IList<IFootballMatch> GetCurrentMatches()
     {
-        throw new NotImplementedException();
+        return matchDataStore.GetActive()
+            .Select((match, index) => new { Match = match, Index = index })
+            .OrderByDescending(sum => sum.Match.HomeTeamScore + sum.Match.AwayTeamScore)
+            .ThenByDescending(i => i.Index)
+            .Select(match => match.Match)
+            .ToList();
     }
 }
