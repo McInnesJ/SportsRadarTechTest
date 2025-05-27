@@ -30,7 +30,7 @@ public class FootballMatchTests
         var match = new FootballMatch(HomeTeam, AwayTeam);
         
         // Act
-        match.UpdateScore(1,0);
+        match.UpdateScore(homeScore, awayScore);
 
         // Assert
         Assert.AreEqual(homeScore, match.HomeTeamScore);
@@ -52,7 +52,7 @@ public class FootballMatchTests
         var ex = Assert.ThrowsException<ArgumentException>(() => match.UpdateScore(1, 2));
 
         // Assert
-        Assert.AreEqual("Score can only be incremented one team at a time.", ex.Message);
+        Assert.AreEqual("Score can only be incremented one team at a time", ex.Message);
     }
 
     [TestMethod]
@@ -85,5 +85,19 @@ public class FootballMatchTests
 
         // Assert
         Assert.AreEqual("Score can only be incremented one team at a time", ex.Message);
+    }
+
+    [TestMethod]
+    public void UpdateScore_NoUpdate_ExceptionThrown()
+    {
+        // Arrange
+        var match = new FootballMatch(HomeTeam, AwayTeam);
+        match.UpdateScore(1, 0);
+
+        // Act
+        var ex = Assert.ThrowsException<ArgumentException>(() => match.UpdateScore(1, 0));
+
+        // Assert
+        Assert.AreEqual("No update required. Score already set to requested values", ex.Message);
     }
 }

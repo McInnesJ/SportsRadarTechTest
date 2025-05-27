@@ -3,5 +3,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3dd41e21_002D8c90_002D475c_002D9aad_002Dfb401cad69c8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="StartMatch_BothTeamsValid_MatchCreated_NilNil" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;MSTest::B11BE482-491D-4AAE-868B-53719E17356A::net8.0::Scoring.GenericScoreBoard.Test.ScoreBoardTests&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::B11BE482-491D-4AAE-868B-53719E17356A::net8.0::Scoring.GenericScoreBoard.Test.FootballMatchTests.UpdateScore_NoUpdate_ExceptionThrown&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::B11BE482-491D-4AAE-868B-53719E17356A::net8.0::Scoring.GenericScoreBoard.Test.FootballMatchTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
