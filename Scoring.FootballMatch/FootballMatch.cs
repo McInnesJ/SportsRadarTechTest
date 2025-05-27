@@ -1,6 +1,4 @@
-using Scoring.GenericScoreBoard.API;
-
-namespace Scoring.GenericScoreBoard.Implementation;
+namespace Scoring.FootballMatch;
 
 public class FootballMatch(string homeTeam, string awayTeam) : IFootballMatch
 {

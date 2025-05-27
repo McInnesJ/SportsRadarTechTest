@@ -1,6 +1,6 @@
 using System.Data;
-using Scoring.GenericScoreBoard.API;
-using Scoring.GenericScoreBoard.InternalServices;
+using Scoring.FootballMatch;
+using Scoring.MatchDataStore;
 
 namespace Scoring.GenericScoreBoard.Implementation;
 
@@ -38,7 +38,7 @@ public class ScoreBoard(
             throw new ArgumentException($"'{awayTeam}' is not a valid team name");
         }
 
-        matchDataStore.Add(new FootballMatch(homeTeam, awayTeam));
+        matchDataStore.Add(new FootballMatch.FootballMatch(homeTeam, awayTeam));
     }
 
     public void EndMatch(string homeTeam, string awayTeam)

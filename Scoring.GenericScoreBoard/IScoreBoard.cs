@@ -1,4 +1,6 @@
-namespace Scoring.GenericScoreBoard.API;
+using Scoring.FootballMatch;
+
+namespace Scoring.GenericScoreBoard;
 
 public interface IScoreBoard
 {

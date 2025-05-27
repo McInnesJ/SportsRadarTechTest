@@ -12,7 +12,7 @@ public class FootballMatchTests
     public void FootballMatch_InitialState()
     {
         // Arrange & Act
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
         
         // Assert
         Assert.AreEqual(HomeTeam, match.HomeTeam);
@@ -27,7 +27,7 @@ public class FootballMatchTests
     public void UpdateScore_ScoreSet(int homeScore, int awayScore)
     {
         // Arrange
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
         
         // Act
         match.UpdateScore(homeScore, awayScore);
@@ -45,7 +45,7 @@ public class FootballMatchTests
         // but the requirements specified this method signature.
         
         // Arrange
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
         match.UpdateScore(1, 0);
 
         // Act
@@ -59,7 +59,7 @@ public class FootballMatchTests
     public void UpdateScore_OneGoalPerTeam_ExceptionThrown()
     {
         // Arrange
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
 
         // Act
         var ex = Assert.ThrowsException<ArgumentException>(() => match.UpdateScore(1, 1));
@@ -76,7 +76,7 @@ public class FootballMatchTests
         // In a Web API world, this endpoint could even have different permissions required such that only a manager could reset an incorrect score
         
         // Arrange
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
         match.UpdateScore(1, 0);
         match.UpdateScore(1, 1);
 
@@ -91,7 +91,7 @@ public class FootballMatchTests
     public void UpdateScore_NoUpdate_ExceptionThrown()
     {
         // Arrange
-        var match = new FootballMatch(HomeTeam, AwayTeam);
+        var match = new FootballMatch.FootballMatch(HomeTeam, AwayTeam);
         match.UpdateScore(1, 0);
 
         // Act

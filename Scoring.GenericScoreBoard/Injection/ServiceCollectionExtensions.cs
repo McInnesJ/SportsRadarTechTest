@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using Scoring.GenericScoreBoard.API;
+using Scoring.FootballMatch;
 using Scoring.GenericScoreBoard.Implementation;
 
 namespace Scoring.GenericScoreBoard.Injection;
@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
         
         services.Configure(configureScoreboard);
 
-        services.AddScoped<IFootballMatch, FootballMatch>();
+        services.AddFootballMatch();
         services.AddScoped<IScoreBoard, ScoreBoard>();
         
         return services;

@@ -1,6 +1,6 @@
-using Scoring.GenericScoreBoard.API;
+using Scoring.FootballMatch;
 
-namespace Scoring.GenericScoreBoard.InternalServices;
+namespace Scoring.MatchDataStore;
 
 public interface IMatchDataStore
 {
