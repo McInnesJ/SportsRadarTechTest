@@ -1,4 +1,4 @@
-namespace ScoreBoard;
+namespace Scoring.GenericScoreBoard;
 
 public interface ITeamValidator
 {
