@@ -45,7 +45,7 @@ public class ScoreBoard(
     {
         if (!matchDataStore.TryGetActiveMatch(homeTeam, awayTeam, out var match))
         {
-            throw new DataException($"No active match found between {homeTeam} and {awayTeam}");
+            throw new DataException($"No match found between {homeTeam} and {awayTeam}");
         }
 
         matchDataStore.EndMatch(match);
@@ -53,7 +53,9 @@ public class ScoreBoard(
 
     public IFootballMatch GetMatch(string homeTeam, string awayTeam)
     {
-        throw new NotImplementedException();
+        return matchDataStore.TryGetActiveMatch(homeTeam, awayTeam, out var match)
+            ? match
+            : throw new DataException($"No match found between {homeTeam} and {awayTeam}");
     }
 
     public IList<IFootballMatch> GetCurrentMatches()

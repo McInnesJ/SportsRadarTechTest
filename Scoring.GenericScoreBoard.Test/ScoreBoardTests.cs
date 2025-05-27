@@ -169,7 +169,7 @@ public class ScoreBoardTests
         var ex = Assert.ThrowsException<DataException>(() => _sut.EndMatch(HomeTeam, AwayTeam));
 
         // Assert
-        Assert.AreEqual("No active match found between Norway and Sweden", ex.Message);
+        Assert.AreEqual("No match found between Norway and Sweden", ex.Message);
         
         _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
             m.HomeTeam == HomeTeam
@@ -184,16 +184,15 @@ public class ScoreBoardTests
     public void GetMatch_MatchFound_MatchReturned()
     {
         // Arrange
-        IFootballMatch returnedMatch = new FootballMatch(HomeTeam, AwayTeam);
-        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
+        IFootballMatch expectedMatch = new FootballMatch(HomeTeam, AwayTeam);
+        _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out expectedMatch)).Returns(true);
 
         // Act
-        _sut.GetMatch(HomeTeam, AwayTeam);
+        var actualMatch = _sut.GetMatch(HomeTeam, AwayTeam);
 
         // Assert
-        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
-            m.HomeTeam == HomeTeam
-            && m.AwayTeam == AwayTeam)), Times.Once);
+        Assert.AreEqual(HomeTeam, actualMatch.HomeTeam);
+        Assert.AreEqual(AwayTeam, actualMatch.AwayTeam);
     }
 
     [TestMethod]
@@ -207,11 +206,7 @@ public class ScoreBoardTests
         var ex = Assert.ThrowsException<DataException>(() => _sut.EndMatch(HomeTeam, AwayTeam));
 
         // Assert
-        Assert.AreEqual("Match not found", ex.Message);
-
-        _matchDataStore.Verify(ds => ds.EndMatch(It.Is<IFootballMatch>(m =>
-            m.HomeTeam == HomeTeam
-            && m.AwayTeam == AwayTeam)), Times.Never);
+        Assert.AreEqual("No match found between Norway and Sweden", ex.Message);
     }
 
     #endregion GetMatch
