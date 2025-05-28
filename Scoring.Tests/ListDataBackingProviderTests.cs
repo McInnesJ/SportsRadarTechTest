@@ -1,4 +1,3 @@
-using Scoring.FootballMatch;
 using Scoring.MatchDataStore.InMemory;
 
 namespace Scoring.Tests;

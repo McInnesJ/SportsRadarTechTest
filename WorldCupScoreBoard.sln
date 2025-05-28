@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.GenericScoreBoard", "Scoring.GenericScoreBoard\Scoring.GenericScoreBoard.csproj", "{F3235350-D15D-42AB-9FCB-F254CE8BB9FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.Tests", "Scoring.Tests\Scoring.Tests.csproj", "{B11BE482-491D-4AAE-868B-53719E17356A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.MatchDataStore.InMemory", "Scoring.MatchDataStore.InMemory\Scoring.MatchDataStore.InMemory.csproj", "{757077A7-BCEB-463F-82E0-8D1582CBC907}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.MatchDataStore", "Scoring.MatchDataStore\Scoring.MatchDataStore.csproj", "{7C9574D0-B047-4D61-A95E-43C450C57C53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.FootballMatch", "Scoring.FootballMatch\Scoring.FootballMatch.csproj", "{E729FADB-5465-4E8C-964F-41B73689CD8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.Scoreboard.Football", "Scoring.Scoreboard.Football\Scoring.Scoreboard.Football.csproj", "{FB556D3D-F0BF-44CA-A31D-A52A27AAA08C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.Scoreboard.Football.Generic", "Scoring.Scoreboard.Football.Generic\Scoring.Scoreboard.Football.Generic.csproj", "{AC343D00-5970-495F-9704-6B0DA79087E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.TeamValidator", "Scoring.TeamValidator\Scoring.TeamValidator.csproj", "{C7A970F8-EDC2-41F4-AC65-6AF9B077568F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scoring.TeamValidator.InMemory", "Scoring.TeamValidator.InMemory\Scoring.TeamValidator.InMemory.csproj", "{0EB0AE30-0FD5-4BB9-9126-38FFF60CC424}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F3235350-D15D-42AB-9FCB-F254CE8BB9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3235350-D15D-42AB-9FCB-F254CE8BB9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3235350-D15D-42AB-9FCB-F254CE8BB9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3235350-D15D-42AB-9FCB-F254CE8BB9FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B11BE482-491D-4AAE-868B-53719E17356A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B11BE482-491D-4AAE-868B-53719E17356A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B11BE482-491D-4AAE-868B-53719E17356A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,9 +38,21 @@ Global
 		{7C9574D0-B047-4D61-A95E-43C450C57C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C9574D0-B047-4D61-A95E-43C450C57C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C9574D0-B047-4D61-A95E-43C450C57C53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E729FADB-5465-4E8C-964F-41B73689CD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E729FADB-5465-4E8C-964F-41B73689CD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E729FADB-5465-4E8C-964F-41B73689CD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E729FADB-5465-4E8C-964F-41B73689CD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB556D3D-F0BF-44CA-A31D-A52A27AAA08C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB556D3D-F0BF-44CA-A31D-A52A27AAA08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB556D3D-F0BF-44CA-A31D-A52A27AAA08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB556D3D-F0BF-44CA-A31D-A52A27AAA08C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC343D00-5970-495F-9704-6B0DA79087E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC343D00-5970-495F-9704-6B0DA79087E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC343D00-5970-495F-9704-6B0DA79087E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC343D00-5970-495F-9704-6B0DA79087E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A970F8-EDC2-41F4-AC65-6AF9B077568F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A970F8-EDC2-41F4-AC65-6AF9B077568F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A970F8-EDC2-41F4-AC65-6AF9B077568F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A970F8-EDC2-41F4-AC65-6AF9B077568F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB0AE30-0FD5-4BB9-9126-38FFF60CC424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB0AE30-0FD5-4BB9-9126-38FFF60CC424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB0AE30-0FD5-4BB9-9126-38FFF60CC424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB0AE30-0FD5-4BB9-9126-38FFF60CC424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

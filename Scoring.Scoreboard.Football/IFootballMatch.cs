@@ -1,4 +1,4 @@
-namespace Scoring.FootballMatch;
+namespace Scoring.Scoreboard.Football;
 
 public interface IFootballMatch
 {

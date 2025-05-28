@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Scoring.FootballMatch;
+using Scoring.Scoreboard.Football;
 
 namespace Scoring.MatchDataStore;
 

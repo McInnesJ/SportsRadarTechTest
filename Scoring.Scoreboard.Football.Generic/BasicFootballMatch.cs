@@ -1,4 +1,4 @@
-namespace Scoring.FootballMatch;
+namespace Scoring.Scoreboard.Football.Generic;
 
 public class BasicFootballMatch(string homeTeam, string awayTeam) : IFootballMatch
 {

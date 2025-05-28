@@ -6,8 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Scoring.Scoreboard.Football\Scoring.Scoreboard.Football.csproj" />
-    </ItemGroup>
-
 </Project>

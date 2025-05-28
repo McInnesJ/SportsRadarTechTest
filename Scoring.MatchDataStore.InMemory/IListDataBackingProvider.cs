@@ -1,4 +1,4 @@
-using Scoring.FootballMatch;
+using Scoring.Scoreboard.Football;
 
 namespace Scoring.MatchDataStore.InMemory;
 

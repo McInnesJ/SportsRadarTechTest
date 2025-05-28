@@ -18,8 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Scoring.GenericScoreBoard\Scoring.GenericScoreBoard.csproj" />
       <ProjectReference Include="..\Scoring.MatchDataStore.InMemory\Scoring.MatchDataStore.InMemory.csproj" />
+      <ProjectReference Include="..\Scoring.Scoreboard.Football.Generic\Scoring.Scoreboard.Football.Generic.csproj" />
+      <ProjectReference Include="..\Scoring.TeamValidator\Scoring.TeamValidator.csproj" />
     </ItemGroup>
 
 </Project>
