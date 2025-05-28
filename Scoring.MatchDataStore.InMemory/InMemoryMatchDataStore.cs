@@ -1,31 +1,50 @@
-﻿using Scoring.FootballMatch;
+﻿using System.Data;
+using System.Diagnostics.CodeAnalysis;
+using Scoring.FootballMatch;
 
 namespace Scoring.MatchDataStore.InMemory;
 
 public class InMemoryMatchDataStore(IListDataBackingProvider dataBackingProvider) : IMatchDataStore
 {
+    private IList<IFootballMatch> _activeMatches = dataBackingProvider.GetDataBacking();
+    private IList<IFootballMatch> _inactiveMatches = dataBackingProvider.GetDataBacking();
+    
     public void Add(IFootballMatch footballMatch)
     {
-        throw new NotImplementedException();
+        _activeMatches.Add(footballMatch);
     }
 
-    public bool TryGetActiveMatch(string homeTeam, string awayTeam, out IFootballMatch footballMatch)
+    public bool TryGetActiveMatch(string homeTeam, string awayTeam, [NotNullWhen(true)] out IFootballMatch? match)
     {
-        throw new NotImplementedException();
+        match = _activeMatches.FirstOrDefault(m => m.HomeTeam == homeTeam && m.AwayTeam == awayTeam);
+        return match is not null;
     }
 
-    public bool TryGetActiveMatchFor(string teamName, out IFootballMatch match)
+    public bool TryGetActiveMatchFor(string teamName, [NotNullWhen(true)] out IFootballMatch? match)
     {
-        throw new NotImplementedException();
+        match = _activeMatches.FirstOrDefault(m => m.HomeTeam == teamName);
+        if (match is not null)
+        {
+            return true;
+        }
+        
+        match = _activeMatches.FirstOrDefault(m => m.AwayTeam == teamName);
+        return match is not null;
     }
 
     public void EndMatch(IFootballMatch footballMatch)
     {
-        throw new NotImplementedException();
+        var matchWasRemoved = _activeMatches.Remove(footballMatch);
+        if (!matchWasRemoved)
+        {
+            throw new DataException("No active match found");
+        }
+        
+        _inactiveMatches.Add(footballMatch);
     }
 
     public IList<IFootballMatch> GetActive()
     {
-        throw new NotImplementedException();
+        return new List<IFootballMatch>(_activeMatches);
     }
 }

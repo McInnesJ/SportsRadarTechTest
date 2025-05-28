@@ -133,8 +133,8 @@ public class InMemoryMatchDataStoreTests
     public void TryGetActiveMatchFor_MatchExistInInactive_ReturnsFalse()
     {
         // Arrange
-        _activeGames.Add(new BasicFootballMatch(HomeTeam, AwayTeam));
-        _inactiveGames.Add(new BasicFootballMatch("Scotland", "France"));
+        _activeGames.Add(new BasicFootballMatch("Scotland", "France"));
+        _inactiveGames.Add(new BasicFootballMatch(HomeTeam, AwayTeam));
 
         // Act
         var result = _sut.TryGetActiveMatch(HomeTeam, AwayTeam, out var returnedMatch);

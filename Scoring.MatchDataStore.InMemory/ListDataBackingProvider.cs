@@ -4,7 +4,7 @@ namespace Scoring.MatchDataStore.InMemory;
 
 public class ListDataBackingProvider : IListDataBackingProvider
 {
-    public ICollection<IFootballMatch> GetDataBacking()
+    public IList<IFootballMatch> GetDataBacking()
     {
         return new List<IFootballMatch>();
     }
