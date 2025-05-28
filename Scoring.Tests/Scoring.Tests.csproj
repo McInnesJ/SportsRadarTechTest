@@ -20,6 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Scoring.MatchDataStore.InMemory\Scoring.MatchDataStore.InMemory.csproj" />
       <ProjectReference Include="..\Scoring.Scoreboard.Football.Generic\Scoring.Scoreboard.Football.Generic.csproj" />
+      <ProjectReference Include="..\Scoring.TeamValidator.InMemory\Scoring.TeamValidator.InMemory.csproj" />
       <ProjectReference Include="..\Scoring.TeamValidator\Scoring.TeamValidator.csproj" />
     </ItemGroup>
 
