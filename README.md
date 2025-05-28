@@ -14,9 +14,10 @@ Work on next:
 Design choices:
 - I have set this up as a public facing library. The intent is for this to be decoupled and configurable by the consumers.
 - For example, a consumer wishing to use this library could set it up like so
-  '''csharp services.Scoreboard(builder =>
+  ```csharp
+  services.Scoreboard(builder =>
      builder.WithInMemoryDataStore()
      builder.WithInMemoryTeamValidator([] {team1, team2, ...})
      )
-  '''
+  ```
   Should that consumer with to change to an SQLite backed data store, for example, they would simply need to change the registration.
