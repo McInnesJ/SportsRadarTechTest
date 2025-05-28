@@ -92,7 +92,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 
@@ -109,7 +109,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 
@@ -158,7 +158,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 
@@ -174,7 +174,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 
@@ -192,7 +192,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 
@@ -210,7 +210,7 @@ public class InMemoryMatchDataStoreTests
 
         // Assert
         Assert.IsTrue(result);
-        Assert.AreEqual(match.HomeTeam, returnedMatch.HomeTeam);
+        Assert.AreEqual(match.HomeTeam, returnedMatch!.HomeTeam);
         Assert.AreEqual(match.AwayTeam, returnedMatch.AwayTeam);
     }
 

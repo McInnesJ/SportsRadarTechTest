@@ -117,9 +117,9 @@ public class ScoreBoardTests
         _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
         _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(true);
         
-        IFootballMatch homeTeamMatch = new BasicFootballMatch(HomeTeam, "Scotland");
+        IFootballMatch? homeTeamMatch = new BasicFootballMatch(HomeTeam, "Scotland");
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(true);
-        IFootballMatch awayTeamMatch;
+        IFootballMatch? awayTeamMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(false);
 
         // Act
@@ -142,9 +142,9 @@ public class ScoreBoardTests
         _teamValidator.Setup(tv => tv.IsValid(HomeTeam)).Returns(true);
         _teamValidator.Setup(tv => tv.IsValid(AwayTeam)).Returns(true);
 
-        IFootballMatch homeTeamMatch;
+        IFootballMatch? homeTeamMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(HomeTeam, out homeTeamMatch)).Returns(false);
-        IFootballMatch awayTeamMatch = new BasicFootballMatch("Scotland", AwayTeam);
+        IFootballMatch? awayTeamMatch = new BasicFootballMatch("Scotland", AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatchFor(AwayTeam, out awayTeamMatch)).Returns(true);
 
         // Act
@@ -168,7 +168,7 @@ public class ScoreBoardTests
     public void EndMatch_MatchFound_RemovedFromDataStore()
     {
         // Arrange
-        IFootballMatch returnedMatch = new BasicFootballMatch(HomeTeam, AwayTeam);
+        IFootballMatch? returnedMatch = new BasicFootballMatch(HomeTeam, AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(true);
 
         // Act
@@ -184,7 +184,7 @@ public class ScoreBoardTests
     public void EndMatch_MatchNotFound_ExceptionThrown()
     {
         // Arrange
-        IFootballMatch returnedMatch;
+        IFootballMatch? returnedMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
 
         // Act
@@ -206,7 +206,7 @@ public class ScoreBoardTests
     public void GetMatch_MatchFound_MatchReturned()
     {
         // Arrange
-        IFootballMatch expectedMatch = new BasicFootballMatch(HomeTeam, AwayTeam);
+        IFootballMatch? expectedMatch = new BasicFootballMatch(HomeTeam, AwayTeam);
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out expectedMatch)).Returns(true);
 
         // Act
@@ -221,7 +221,7 @@ public class ScoreBoardTests
     public void GetMatch_MatchNotFound_ExceptionThrown()
     {
         // Arrange
-        IFootballMatch returnedMatch;
+        IFootballMatch? returnedMatch;
         _matchDataStore.Setup(ds => ds.TryGetActiveMatch(HomeTeam, AwayTeam, out returnedMatch)).Returns(false);
 
         // Act
