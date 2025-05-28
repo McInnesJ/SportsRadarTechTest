@@ -9,6 +9,8 @@ public class BasicFootballMatch(string homeTeam, string awayTeam) : IFootballMat
 
     public void UpdateScore(int homeScore, int awayScore)
     {
+        // This method assumes scores are to be updated one team at a time and only ever incremented by 1.
+        
         if (homeScore == HomeTeamScore + 1 && awayScore == AwayTeamScore)
         {
             HomeTeamScore = homeScore;

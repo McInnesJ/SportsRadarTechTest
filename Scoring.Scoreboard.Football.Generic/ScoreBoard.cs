@@ -10,6 +10,7 @@ public class ScoreBoard(
 {
     public void StartMatch(string homeTeam, string awayTeam)
     {
+        // If either team is already involved in an active match, no new match can begin
         if (matchDataStore.TryGetActiveMatchFor(homeTeam, out var homeTeamMatch))
         {
             throw new ArgumentException($"{homeTeam} is already playing against {homeTeamMatch.AwayTeam}");
@@ -20,6 +21,7 @@ public class ScoreBoard(
             throw new ArgumentException($"{awayTeam} is already playing against {awayTeamMatch.HomeTeam}");
         }
 
+        // Each team must be valid (for example, involved in the current competition)
         var homeTeamIsValid = teamValidator.IsValid(homeTeam);
         var awayTeamIsValid = teamValidator.IsValid(awayTeam);
 
@@ -60,6 +62,7 @@ public class ScoreBoard(
 
     public IList<IFootballMatch> GetCurrentMatches()
     {
+        // Order by combined score and then the most recently started match
         return matchDataStore.GetActive()
             .Select((match, index) => new { Match = match, Index = index })
             .OrderByDescending(sum => sum.Match.HomeTeamScore + sum.Match.AwayTeamScore)
