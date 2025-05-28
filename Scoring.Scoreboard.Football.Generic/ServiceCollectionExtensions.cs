@@ -11,7 +11,14 @@ public static class ServiceCollectionExtensions
         
         services.Configure(configureScoreboard);
 
+        services.AddScoped<IFootballMatch, BasicFootballMatch>();
         services.AddScoped<IScoreBoard, ScoreBoard>();
+
+        var builder = new ScoreboardBuilder
+        {
+            Services = services
+        };
+        configureScoreboard(builder);
         
         return services;
     } 

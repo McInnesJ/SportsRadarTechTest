@@ -6,8 +6,8 @@ namespace Scoring.MatchDataStore.InMemory;
 
 public class InMemoryMatchDataStore(IListDataBackingProvider dataBackingProvider) : IMatchDataStore
 {
-    private IList<IFootballMatch> _activeMatches = dataBackingProvider.GetDataBacking();
-    private IList<IFootballMatch> _inactiveMatches = dataBackingProvider.GetDataBacking();
+    private readonly IList<IFootballMatch> _activeMatches = dataBackingProvider.GetDataBacking();
+    private readonly IList<IFootballMatch> _inactiveMatches = dataBackingProvider.GetDataBacking();
     
     public void Add(IFootballMatch footballMatch)
     {

@@ -1,4 +1,5 @@
 using Scoring.MatchDataStore.InMemory;
+using Scoring.Scoreboard.Football;
 
 namespace Scoring.Tests;
 
