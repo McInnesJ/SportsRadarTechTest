@@ -27,6 +27,6 @@ public class InMemoryTeamValidatorTests
         var sut = new InMemoryTeamValidator(new List<string> { "Norway", "Sweden" });
 
         // Act & Assert
-        Assert.IsTrue(sut.IsValid(teamName));
+        Assert.IsFalse(sut.IsValid(teamName));
     }
 }

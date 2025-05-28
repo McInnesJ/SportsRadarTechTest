@@ -6,6 +6,6 @@ public class InMemoryTeamValidator(IList<string> validTeamNames) : ITeamValidato
 {
     public bool IsValid(string teamName)
     {
-        throw new NotImplementedException();
+        return validTeamNames.Contains(teamName);
     }
 }
